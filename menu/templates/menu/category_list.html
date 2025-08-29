@@ -1,0 +1,18 @@
+ {% extends 'base.html' %}
+{% block title %}دسته‌بندی‌ها{% endblock %}
+{% block content %}
+<h3>دسته‌بندی‌ها</h3>
+<a href="{% url 'menu:category_create' %}" class="btn btn-primary mb-3">دسته‌بندی جدید</a>
+<table class="table table-striped">
+    <thead>
+        <tr><th>نام دسته‌بندی</th></tr>
+    </thead>
+    <tbody>
+        {% for cat in categories %}
+        <tr><td>{{ cat.name }}</td></tr>
+        {% empty %}
+        <tr><td>دسته‌بندی وجود ندارد</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

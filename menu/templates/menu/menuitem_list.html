@@ -1,0 +1,28 @@
+ {% extends 'base.html' %}
+{% block title %}آیتم‌های منو{% endblock %}
+{% block content %}
+<h3>آیتم‌های منو</h3>
+<a href="{% url 'menu:menuitem_create' %}" class="btn btn-primary mb-3">محصول جدید</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>نام</th>
+            <th>دسته‌بندی</th>
+            <th>قیمت فروش</th>
+            <th>موجود است؟</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category.name }}</td>
+            <td>{{ item.price }} تومان</td>
+            <td>{% if item.is_available %}بله{% else %}خیر{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">محصولی موجود نیست</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

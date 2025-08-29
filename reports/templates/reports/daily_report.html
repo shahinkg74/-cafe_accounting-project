@@ -1,0 +1,26 @@
+ {% extends 'base.html' %}
+{% block title %}گزارش سوددهی روزانه{% endblock %}
+{% block content %}
+<h3>dailyreport_ {{order.create_at|date:'Y-m-d'}}</h3>
+
+<form method="get" class="mb-3">
+    <label for="date">انتخاب تاریخ:</label>
+    <input type="date" id="date" name="date" value="{{ order.create_at|date:'Y-m-d'}}">
+    <button class="btn btn-primary btn-sm" type="submit">نمایش</button>
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <th>جمع فروش</th>
+        <td>{{ report.total_sales }} تومان</td>
+    </tr>
+    <tr>
+        <th>کل هزینه کالاهای فروخته شده</th>
+        <td>{{ report.total_cost }} تومان</td>
+    </tr>
+    <tr>
+        <th>سود خالص</th>
+        <td>{{ report.profit }} تومان</td>
+    </tr>
+</table>
+{% endblock %}

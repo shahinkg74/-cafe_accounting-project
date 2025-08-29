@@ -1,0 +1,34 @@
+ {% extends 'base.html' %}
+{% block title %}جزئیات پرداخت{% endblock %}
+{% block content %}
+<h3>جزئیات پرداخت شماره {{ payment.id }}</h3>
+<p><strong>تاریخ:</strong> {{ payment.date }}</p>
+<p><strong>کاربر:</strong> {{ payment.user.username }}</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>نام محصول</th>
+            <th>تعداد</th>
+            <th>قیمت واحد</th>
+            <th>جمع</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in payment.items.all %}
+        <tr>
+            <td>{{ item.menu_item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.get_subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><strong>جمع کل:</strong> {{ payment.total_amount }} تومان</p>
+<p><strong>روش پرداخت:</strong> {{ payment.get_method_display }}</p>
+<p><strong>یادداشت‌ها:</strong> {{ payment.notes }}</p>
+
+<button onclick="window.print()" class="btn btn-primary mt-3">چاپ سفارش</button>
+{% endblock %}

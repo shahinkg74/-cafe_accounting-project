@@ -1,0 +1,40 @@
+ {% extends 'base.html' %}
+{% block title %}مدیریت انبار{% endblock %}
+{% block content %}
+<h3>لیست کالاهای انبار</h3>
+<a href="{% url 'inventory:create' %}" class="btn btn-primary mb-3">کالای جدید</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>نام کالا</th>
+            <th>مقدار موجود</th>
+            <th>واحد</th>
+            <th>حداقل مقدار هشدار</th>
+            <th>وضعیت</th>
+            <th>ویرایش</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.min_quantity }}</td>
+            <td>
+                {% if item.quantity < item.min_quantity %}
+                    <span class="text-danger">کمبود</span>
+                {% else %}
+                    <span class="text-success">کافی</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'inventory:update' item.pk %}" class="btn btn-sm btn-outline-primary">ویرایش</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">هیچ کالایی موجود نیست</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

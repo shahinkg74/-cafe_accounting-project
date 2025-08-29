@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}چاپ سفارش #{{ order.id }}{% endblock %}
+{% block content %}
+<div class="no-print mb-3">
+    <button onclick="window.print()" class="btn btn-primary">🖨️ چاپ سفارش</button>
+</div>
+
+<h3>رسید سفارش شماره {{ order.id }}</h3>
+<p>date: {{order.created_at|date:"Y/m/d" }}</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>محصول</th>
+            <th>تعداد</th>
+            <th>قیمت</th>
+            <th>جمع</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.orderitem_set.all %}
+        <tr>
+            <td>{{ item.menu_item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.item_price }}</td>
+            <td>{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="3">جمع کل</th>
+            <th>{{ order.total_price }} تومان</th>
+        </tr>
+    </tfoot>
+</table>
+{% endblock %}

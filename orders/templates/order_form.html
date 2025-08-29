@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}ثبت سفارش جدید{% endblock %}
+{% block content %}
+<h3>ثبت سفارش جدید</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>محصول</th>
+                <th>تعداد</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in formset.forms %}
+            <tr>
+                <td>{{ form.menu_item}}</td>
+                <td>{{ form.quantity }}</td>
+                <td>
+                    {% if form.instance.pk %}
+                        {{ form.DELETE }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">ثبت سفارش</button>
+</form>
+{% endblock %}

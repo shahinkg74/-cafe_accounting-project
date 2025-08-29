@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl mb-2">داشبورد امروز</h2>
+<ul class="bg-white p-4 rounded shadow">
+    <li>درآمد: {{ income }} تومان</li>
+    <li>هزینه: {{ cost }} تومان</li>
+    <li class="font-bold">سود: {{ profit }} تومان</li>
+</ul>
+{% endblock %}
